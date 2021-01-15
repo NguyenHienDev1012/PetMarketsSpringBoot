@@ -1,5 +1,6 @@
 package com.petmarkets2020.controller;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.petmarkets2020.model.PostModel;
 import com.petmarkets2020.service.PostService;
+import com.petmarkets2020.service.PostService.IPosts;;
 
 @Controller
 public class PostController {
@@ -19,8 +22,19 @@ public class PostController {
 
 	@RequestMapping("postList")
 	public String postList(Model model) throws InterruptedException, ExecutionException {
-		System.out.println(postService.getAllPost() + "kkkkkkkkk");
-		model.addAttribute("postList", postService.getAllPost());
+		postService.getAllPost(new IPosts() {
+
+			@Override
+			public void responseData(List<PostModel> listPosts) {
+				model.addAttribute("postList", listPosts);
+			}
+		});
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		return "postList";
 	}
 

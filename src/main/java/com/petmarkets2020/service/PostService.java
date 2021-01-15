@@ -16,19 +16,22 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class PostService {
 	public static final String COL_NAME = "Post";
-	List<PostModel> list;
+	private List<PostModel> listPosts;
+	public interface IPosts{
+		   public void responseData(List<PostModel> listPosts);
+	}
 
-	public List<PostModel> getAllPost() {
-		list = new ArrayList<PostModel>();
-		list.clear();
+	public List<PostModel> getAllPost(IPosts iPosts) {
+		listPosts = new ArrayList<PostModel>();
+		listPosts.clear();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
 				for (DataSnapshot posts : snapshot.getChildren()) {
 					PostModel p = posts.getValue(PostModel.class);
-					System.out.println(p.toString());
-					list.add(p);
+					listPosts.add(p);
+					iPosts.responseData(listPosts);
 				}
 
 			}
@@ -38,7 +41,7 @@ public class PostService {
 
 			}
 		});
-		return list;
+		return listPosts;
 	}
 
 	public void refusePost(String idPost) {

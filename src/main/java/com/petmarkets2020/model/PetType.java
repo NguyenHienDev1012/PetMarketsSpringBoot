@@ -33,4 +33,6 @@ public class PetType {
 		return "PetType [image=" + image + ", name=" + name + "]";
 	}
 
+	
+
 }

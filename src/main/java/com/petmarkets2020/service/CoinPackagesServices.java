@@ -17,7 +17,11 @@ public class CoinPackagesServices {
 	private CoinsPackages coinsPackages = new CoinsPackages();
 	private boolean isdeleted = false;
 
-	public ArrayList<CoinsPackages> getListCoinPackages() {
+	public interface ICoins {
+		  void responseData(ArrayList<CoinsPackages> listCoinsPackages);
+	}
+
+	public ArrayList<CoinsPackages> getListCoinPackages(ICoins iCoinPackages) {
 		ArrayList<CoinsPackages> listCoinsPackages = new ArrayList<CoinsPackages>();
 		Utils.connectFireBase("CoinsPackage").addValueEventListener(new ValueEventListener() {
 
@@ -26,7 +30,7 @@ public class CoinPackagesServices {
 				for (DataSnapshot dss : snapshot.getChildren()) {
 					coinsPackages = dss.getValue(CoinsPackages.class);
 					listCoinsPackages.add(coinsPackages);
-					System.out.println(dss.getValue());
+					iCoinPackages.responseData(listCoinsPackages);
 				}
 
 			}
@@ -77,7 +81,5 @@ public class CoinPackagesServices {
 		databaseReference.child(String.valueOf(coinsPackages.getCoinId())).child("value")
 				.setValueAsync(coinsPackages.getValue());
 	}
-	
-
 
 }

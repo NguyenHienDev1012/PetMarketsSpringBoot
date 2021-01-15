@@ -14,7 +14,11 @@ import com.petmarkets2020.model.Utils;
 public class ListHotPostService {
 	private HotPost hotPost = new HotPost();
 
-	public ArrayList<HotPost> getListHotPost() {
+	public interface IHostPost {
+		void responseData(ArrayList<HotPost> lisHotPosts);
+	}
+
+	public ArrayList<HotPost> getListHotPost(IHostPost iHotPost) {
 		ArrayList<HotPost> lisHotPosts = new ArrayList<HotPost>();
 		Utils.connectFireBase("HotPost").addValueEventListener(new ValueEventListener() {
 
@@ -23,10 +27,10 @@ public class ListHotPostService {
 				for (DataSnapshot dss : snapshot.getChildren()) {
 					hotPost = dss.getValue(HotPost.class);
 					lisHotPosts.add(hotPost);
-					System.out.println(dss.getValue());
+					iHotPost.responseData(lisHotPosts);
+
 				}
 
-				System.out.println(hotPost.toString());
 			}
 
 			@Override

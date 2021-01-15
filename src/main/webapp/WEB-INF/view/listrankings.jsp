@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>Manage list rankings</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -54,83 +55,38 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">List Pet Type</h1>
+					<h1 class="h3 mb-2 text-gray-800">Manage list comments</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Pet type</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Details</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered table table-striped"
-									id="dataTable" width="100%" cellspacing="0">
+								<table class="table table-bordered" id="dataTable" width="100%"
+									cellspacing="0">
 									<thead>
-
 										<tr>
 											<th>#</th>
-											<th>Type name</th>
-											<th>Details</th>
+											<th>User ID</th>
+											<th>Content</th>
+											<th>Time</th>
 											<th>Action</th>
 										</tr>
 									</thead>
+
 									<tbody>
-										<c:forEach items="${listPetType}" var="pet" varStatus="loop">
+										<c:forEach items="${listcomments}" var="cmt" varStatus="loop">
 											<tr>
-												<td>${loop.count}</td>
-												<td>${pet.key}</td>
-												<td>${pet.value}</td>
+												<td>${loop.count }</td>
+												<td>${cmt.userId }</td>
+												<td>${cmt.content}</td>
+												<td>${cmt.time }</td>
 												<td>
-													<!-- Add coins modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalLabel"
-														aria-hidden="true">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Details</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<form method="post" action="">
-																	<div class="col-md">
-																		<c:forEach items="${pet.value}" var="petdetails"
-																			varStatus="loop">
-																			<div class="col-md">
+												 <a href="#" class="btn btn-danger btn-circle"> <i class="fas fa-trash"></i></a></td>
+												
 
-																				<div class="row">
-																					<label for="recipient-name" class="col-form-label">
-																						Name:</label> <input type="text" class="form-control"
-																						disabled="disabled" name="coinId"
-																						value="${petdetails.value.name}"
-																						id="recipient-name">
-																				</div>
-																				<div class="row">
-																					<label for="recipient-name" class="col-form-label">
-																						Images:</label> 
-																						
-																				  <img 	src="https://firebasestorage.googleapis.com/v0/b/pet-market-6996.appspot.com/o/images%2Fpet_type%2F${petdetails.value.image}?alt=media&token=cba8b49d-965c-4ca4-a6fc-980357fc575a"
-																						width="100px" height="100px">
-																				</div>
-																			</div>
-																		</c:forEach>
-
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Close</button>
-																		<button type="submit" class="btn btn-primary">OK</button>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div> <!-- End add coins modal --> <a type="button"
-													class="btn btn-warning btn-circle" data-toggle="modal"
-													data-target="#exampleModal" data-whatever="@fat"><i
-														class="fas fa-info-circle"> </i></a>
-												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -144,7 +100,6 @@
 
 			</div>
 			<!-- End of Main Content -->
-
 
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">

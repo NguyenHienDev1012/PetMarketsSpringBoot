@@ -341,8 +341,8 @@
 																				<i class="fa fa-check" aria-hidden="true">&nbsp;</i>Duyệt
 																				bài đăng
 																			</a>
-																			<a href="#" class="btn btn-warning">
-																				<i class="fas fa-comment-slash"></i>&nbsp;</i>Từ chối
+																			<a href="refusePost?idPost=${post.postId}" class="btn btn-warning">
+																				<i class="fas fa-comment-slash"></i>&nbsp;Từ chối
 																				bài đăng
 																			</a>
 																		</div>

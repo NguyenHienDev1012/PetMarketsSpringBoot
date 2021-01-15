@@ -1,6 +1,5 @@
 package com.petmarkets2020.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
@@ -14,35 +13,28 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class PetTypeServices {
 	public static final String COL_NAME = "PetType";
+	HashMap<String, PetType> hm = new HashMap<String, PetType>();
+	private HashMap<String, PetType> childMap;
 
-	public HashMap<String, HashMap<String, PetType>> getAll() {
+	public interface IPetType {
+		void responseData(HashMap<String, HashMap<String, PetType>> thm);
+	}
 
-		ArrayList<String> list = new ArrayList<String>();
-		HashMap<String, PetType> hm = new HashMap<String, PetType>();
-		
-		HashMap<String, HashMap<String, PetType>>  thm = new HashMap<String, HashMap<String, PetType>>();
-	
+	public void getAll(IPetType iPetType) {
+		HashMap<String, HashMap<String, PetType>> thm = new HashMap<String, HashMap<String, PetType>>();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
+
 				for (DataSnapshot data : snapshot.getChildren()) {
-					System.out.println(data.getKey());
-					list.add(data.getKey());
+					childMap = new HashMap<>();
+					data.getChildren().forEach(dataSnap -> {
+						childMap.put(dataSnap.getKey(), dataSnap.getValue(PetType.class));
+					});
+					thm.put(data.getKey(), childMap);
 				}
-				for (int i = 0; i < list.size(); i++) {
-					
-					for(DataSnapshot s : snapshot.child(list.get(i)).getChildren()) {
-						if(!hm.isEmpty()) {
-							hm.clear();
-						}
-						PetType pet = s.getValue(PetType.class);
-						hm.put(s.getKey(), pet);
-						//System.out.println(pet.getName()+"LLL");
-					}
-					thm.put(list.get(i), hm);
-					System.out.println(thm);
-				}
+				iPetType.responseData(thm);
 			}
 
 			@Override
@@ -50,29 +42,6 @@ public class PetTypeServices {
 
 			}
 		});
-		//System.out.println(list.size() + "k");
-		return thm;
 	}
-
-//	public HashMap<String, PetType> getPetTypeDetails(String type) {
-//
-//		Utils.connectFireBase(COL_NAME).child("cat").addValueEventListener(new ValueEventListener() {
-//
-//			@Override
-//			public void onDataChange(DataSnapshot snapshot) {
-//
-//				PetType pet = snapshot.getValue(PetType.class);
-//			//	hm.put(snapshot.getKey(), pet);
-//				System.out.println("HHH");
-//				System.out.println(pet.getName()+"LLL");
-//			}
-//
-//			@Override
-//			public void onCancelled(DatabaseError error) {
-//
-//			}
-//		});
-//
-//		return hm;
 
 }

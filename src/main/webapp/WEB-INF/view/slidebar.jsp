@@ -13,7 +13,9 @@
 		id="accordionSidebar">
 
 		<!-- Sidebar - Brand -->
-		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
+		<a
+			class="sidebar-brand d-flex align-items-center justify-content-center"
+			href="dashboard">
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
 			</div>
@@ -36,7 +38,7 @@
 		<div class="sidebar-heading">Interface</div>
 
 		<!-- Nav Item - Pages Collapse Menu -->
-		<li class="nav-item"><a class="nav-link collapsed" href="#"
+		<li class="nav-item"><a class="nav-link collapsed"
 			data-toggle="collapse" data-target="#collapseTwo"
 			aria-expanded="true" aria-controls="collapseTwo"> <i
 				class="fas fa-fw fa-cog"></i> <span>Posts</span>
@@ -45,7 +47,7 @@
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Details:</h6>
-					
+
 					<a class="collapse-item" href="postList">List posts</a> <a
 						class="collapse-item" href="getlisthotpost">Hot posts</a>
 				</div>
@@ -53,8 +55,8 @@
 
 		<!-- Nav Item - Utilities Collapse Menu -->
 		<li class="nav-item"><a class="nav-link collapsed"
-			href="userList" aria-expanded="true"> <i
-				class="fas fa-fw fa-cog"></i> List users
+			href="userList" aria-expanded="true"> <i class="fas fa-fw fa-cog"></i>
+				List users
 		</a></li>
 		<li class="nav-item"><a class="nav-link collapsed"
 			href="listcoinpackages" aria-expanded="true"> <i

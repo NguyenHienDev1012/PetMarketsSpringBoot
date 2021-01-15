@@ -11,23 +11,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petmarkets2020.model.UsersModel;
+import com.petmarkets2020.model.Utils;
+
 @Service
 public class UsersModelServices {
 	public static final String COL_NAME = "Users";
-	List<UsersModel> list;
+	private List<UsersModel> listUsers;
 
-	public List<UsersModel> getListUser() {
-		list = new ArrayList<UsersModel>();
-		FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-		DatabaseReference databaseReference = firebaseDatabase.getReference(COL_NAME);
-		databaseReference.addValueEventListener(new ValueEventListener() {
-		
+	public interface IUsers {
+		public void responseData(List<UsersModel> list);
+	}
+
+	public List<UsersModel> getListUser(IUsers iUsers) {
+		listUsers = new ArrayList<UsersModel>();
+		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
+
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
-				for (DataSnapshot data: snapshot.getChildren()) {
-					System.out.println(data.getKey());
+				for (DataSnapshot data : snapshot.getChildren()) {
 					UsersModel user = data.getValue(UsersModel.class);
-					list.add(user);
+					listUsers.add(user);
+					iUsers.responseData(listUsers);
+
 				}
 			}
 			@Override
@@ -35,7 +40,6 @@ public class UsersModelServices {
 
 			}
 		});
-//	
-		return list;
+		return listUsers;
 	}
 }
