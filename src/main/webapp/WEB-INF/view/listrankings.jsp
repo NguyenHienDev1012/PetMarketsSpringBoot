@@ -55,7 +55,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Manage list comments</h1>
+					<h1 class="h3 mb-2 text-gray-800">Manage list rankings</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -64,30 +64,33 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
+								<table class="table table-bordered" id="dataTable" width="80%"
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>#</th>
+											<th>Ranking ID</th>
+											<th>Post ID</th>
 											<th>User ID</th>
-											<th>Content</th>
+											<th>Comment</th>
+											<th>Rate</th>
 											<th>Time</th>
-											<th>Action</th>
 										</tr>
 									</thead>
 
 									<tbody>
-										<c:forEach items="${listcomments}" var="cmt" varStatus="loop">
-											<tr>
-												<td>${loop.count }</td>
-												<td>${cmt.userId }</td>
-												<td>${cmt.content}</td>
-												<td>${cmt.time }</td>
-												<td>
-												 <a href="#" class="btn btn-danger btn-circle"> <i class="fas fa-trash"></i></a></td>
-												
-
-											</tr>
+										<c:forEach items="${hmRankings}" var="rankings"
+											varStatus="loop">
+											<c:forEach items="${rankings.value}" var="ranking"
+												varStatus="loop1">
+												<tr>
+													<td>${rankings.key}</td>
+													<td>${ranking.value.postId}</td>
+													<td>${ranking.value.userId}</td>
+													<td>${ranking.value.comment}</td>
+													<td>${ranking.value.rate}</td>
+													<td>${ranking.value.time}</td>
+												</tr>
+											</c:forEach>
 										</c:forEach>
 									</tbody>
 								</table>

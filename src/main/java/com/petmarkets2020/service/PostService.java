@@ -16,14 +16,15 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class PostService {
 	public static final String COL_NAME = "Post";
+	private String col_isHidden = "hidden";
 	private List<PostModel> listPosts;
-	public interface IPosts{
-		   public void responseData(List<PostModel> listPosts);
+
+	public interface IPosts {
+		public void responseData(List<PostModel> listPosts);
 	}
 
 	public List<PostModel> getAllPost(IPosts iPosts) {
 		listPosts = new ArrayList<PostModel>();
-		listPosts.clear();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
@@ -46,12 +47,12 @@ public class PostService {
 
 	public void refusePost(String idPost) {
 		DatabaseReference databaseReference = Utils.connectFireBase(COL_NAME);
-		databaseReference.child(idPost).child("hidden").setValueAsync(false);
+		databaseReference.child(idPost).child(col_isHidden).setValueAsync(false);
 	}
 
 	public void approvedPost(String idPost) {
 		DatabaseReference databaseReference = Utils.connectFireBase(COL_NAME);
-		databaseReference.child(idPost).child("hidden").setValueAsync(true);
+		databaseReference.child(idPost).child(col_isHidden).setValueAsync(true);
 
 	}
 }

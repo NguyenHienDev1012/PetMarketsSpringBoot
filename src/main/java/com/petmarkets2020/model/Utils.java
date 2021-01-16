@@ -16,9 +16,13 @@ public class Utils {
 	}
 
 	public static DatabaseReference connectFireBase(String name) {
-		firebaseDatabase = FirebaseDatabase.getInstance();
-		databaseReference = firebaseDatabase.getReference(name);
-		return databaseReference;
+		if (firebaseDatabase != null && databaseReference != null) {
+			return databaseReference;
+		}else {
+			firebaseDatabase = FirebaseDatabase.getInstance();
+			databaseReference = firebaseDatabase.getReference(name);
+			return databaseReference;
+		}
 
 	}
 }
