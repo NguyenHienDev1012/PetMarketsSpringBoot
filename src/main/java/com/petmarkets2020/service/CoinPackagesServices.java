@@ -14,25 +14,24 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class CoinPackagesServices {
 
-	private CoinsPackages coinsPackages = new CoinsPackages();
+	private CoinsPackages coinsPackages;
 	private boolean isdeleted = false;
-
+	public static final String COL_NAME = "CoinsPackage";
 	public interface ICoins {
 		  void responseData(ArrayList<CoinsPackages> listCoinsPackages);
 	}
 
-	public ArrayList<CoinsPackages> getListCoinPackages(ICoins iCoinPackages) {
+	public void getListCoinPackages(ICoins iCoinPackages) {
 		ArrayList<CoinsPackages> listCoinsPackages = new ArrayList<CoinsPackages>();
-		Utils.connectFireBase("CoinsPackage").addValueEventListener(new ValueEventListener() {
+		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
-				for (DataSnapshot dss : snapshot.getChildren()) {
-					coinsPackages = dss.getValue(CoinsPackages.class);
+				for (DataSnapshot coins : snapshot.getChildren()) {
+					coinsPackages = coins.getValue(CoinsPackages.class);
 					listCoinsPackages.add(coinsPackages);
-					iCoinPackages.responseData(listCoinsPackages);
 				}
-
+				iCoinPackages.responseData(listCoinsPackages);
 			}
 
 			@Override
@@ -40,7 +39,6 @@ public class CoinPackagesServices {
 
 			}
 		});
-		return listCoinsPackages;
 
 	}
 
@@ -54,12 +52,10 @@ public class CoinPackagesServices {
 				if (coinsPackages.getCoinId() == Integer.parseInt(id)) {
 					databaseReference.child(id).removeValueAsync();
 					isdeleted = false;
-					System.out.println("Vao day 1");
 				}
 
 				else {
 					isdeleted = true;
-					System.out.println("Vao day o");
 				}
 
 			}

@@ -1,6 +1,5 @@
 package com.petmarkets2020.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class RankingsServices {
 	public static final String COL_NAME = "Rankings";
-	public ArrayList<Rankings> listRankings;
 	public HashMap<String, Rankings> hmRankings;
 	public HashMap<String, HashMap<String, Rankings>> rankings = new HashMap<String, HashMap<String, Rankings>>();
 

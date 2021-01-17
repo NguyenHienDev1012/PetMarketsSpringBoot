@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 @Service
 public class FirebaseInitialize {
@@ -31,12 +29,5 @@ public class FirebaseInitialize {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//    public DatabaseReference initFirebase(String tablename) {
-//    	FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//		DatabaseReference databaseReference = firebaseDatabase.getReference(tablename);
-//		return databaseReference;
-//		
-//    }
     }
 }

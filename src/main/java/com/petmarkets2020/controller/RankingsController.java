@@ -24,8 +24,6 @@ public class RankingsController {
 			@Override
 			public void responseData(HashMap<String, HashMap<String, Rankings>> rankings) {
 				model.addAttribute("hmRankings", rankings);
-				System.out.println(rankings.size() + "DDDDDDDD");
-
 			}
 		});
 		try {

@@ -17,7 +17,6 @@ import com.petmarkets2020.service.CoinPackagesServices.ICoins;
 public class CoinPackagesController {
 	@Autowired
 	CoinPackagesServices coinPackagesServices;
-
 	@GetMapping("listcoinpackages")
 	public String getCoinPackages(ModelMap modelMap) {
 		coinPackagesServices.getListCoinPackages(new ICoins() {

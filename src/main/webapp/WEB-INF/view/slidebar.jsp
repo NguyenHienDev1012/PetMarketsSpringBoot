@@ -70,6 +70,10 @@
 			href="rankings" aria-expanded="true"> <i
 				class="fas fa-fw fa-cog"></i> Rankings
 		</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+			href="listHistory" aria-expanded="true"> <i
+				class="fas fa-fw fa-cog"></i> History
+		</a></li>
 		<li class="nav-item"><a class="nav-link collapsed"
 			href="getlistComments" aria-expanded="true"> <i
 				class="fas fa-fw fa-cog"></i> Comments
