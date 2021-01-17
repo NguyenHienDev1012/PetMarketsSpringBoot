@@ -13,7 +13,7 @@ public class PetType {
 	}
 
 	public String getImage() {
-		return image;
+		return imageSplit(image);
 	}
 
 	public void setImage(String image) {
@@ -28,11 +28,15 @@ public class PetType {
 		this.name = name;
 	}
 
+	public String imageSplit(String image) {
+		String[] arr = image.split("/");
+		return arr[2];
+
+	}
+
 	@Override
 	public String toString() {
 		return "PetType [image=" + image + ", name=" + name + "]";
 	}
-
-	
 
 }

@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>List Pet Type</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -70,68 +70,23 @@
 										<tr>
 											<th>#</th>
 											<th>Type name</th>
-											<th>Details</th>
-											<th>Action</th>
+											<th>Name</th>
+											<th>Image</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${listPetType}" var="pet" varStatus="loop">
-											<tr>
-												<td>${loop.count}</td>
-												<td>${pet.key}</td>
-												<td>${pet.value}</td>
-												<td>
-													<!-- Add coins modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalLabel"
-														aria-hidden="true">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Details</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<form method="post" action="">
-																	<div class="col-md">
-																		<c:forEach items="${pet.value}" var="petdetails"
-																			varStatus="loop">
-																			<div class="col-md">
-
-																				<div class="row">
-																					<label for="recipient-name" class="col-form-label">
-																						Name:</label> <input type="text" class="form-control"
-																						disabled="disabled" name="coinId"
-																						value="${petdetails.value.name}"
-																						id="recipient-name">
-																				</div>
-																				<div class="row">
-																					<label for="recipient-name" class="col-form-label">
-																						Images:</label> 
-																						
-																				  <img 	src="https://firebasestorage.googleapis.com/v0/b/pet-market-6996.appspot.com/o/images%2Fpet_type%2F${petdetails.value.image}?alt=media&token=cba8b49d-965c-4ca4-a6fc-980357fc575a"
-																						width="100px" height="100px">
-																				</div>
-																			</div>
-																		</c:forEach>
-
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Close</button>
-																		<button type="submit" class="btn btn-primary">OK</button>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div> <!-- End add coins modal --> <a type="button"
-													class="btn btn-warning btn-circle" data-toggle="modal"
-													data-target="#exampleModal" data-whatever="@fat"><i
-														class="fas fa-info-circle"> </i></a>
-												</td>
-											</tr>
+										<c:forEach items="${listPetType}" var="pet">
+											<c:forEach items="${pet.value}" var="petdetails"
+												varStatus="loop">
+												<tr>
+													<td>${loop.count}</td>
+													<td>${pet.key}</td>
+													<td>${petdetails.value.name}</td>
+													<td><img
+														src="https://firebasestorage.googleapis.com/v0/b/pet-market-6996.appspot.com/o/images%2Fpet_type%2F${petdetails.value.image}?alt=media&token=cba8b49d-965c-4ca4-a6fc-980357fc575a"
+														width="100px" height="100px" alt="image"></td>
+												</tr>
+											</c:forEach>
 										</c:forEach>
 									</tbody>
 								</table>

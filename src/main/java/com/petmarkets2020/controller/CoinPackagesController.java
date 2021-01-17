@@ -1,7 +1,5 @@
 package com.petmarkets2020.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,27 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.petmarkets2020.model.CoinsPackages;
 import com.petmarkets2020.service.CoinPackagesServices;
-import com.petmarkets2020.service.CoinPackagesServices.ICoins;
 
 @Controller
 public class CoinPackagesController {
 	@Autowired
 	CoinPackagesServices coinPackagesServices;
+
 	@GetMapping("listcoinpackages")
 	public String getCoinPackages(ModelMap modelMap) {
-		coinPackagesServices.getListCoinPackages(new ICoins() {
 
-			@Override
-			public void responseData(ArrayList<CoinsPackages> listCoinsPackages) {
-				modelMap.addAttribute("listcoinpackages", listCoinsPackages);
-			}
-
-		});
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		modelMap.addAttribute("listcoinpackages", coinPackagesServices.getListCoinPackages());
 		return "listcoinpackages";
 
 	}

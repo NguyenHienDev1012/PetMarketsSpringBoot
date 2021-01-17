@@ -17,21 +17,20 @@ public class CoinPackagesServices {
 	private CoinsPackages coinsPackages;
 	private boolean isdeleted = false;
 	public static final String COL_NAME = "CoinsPackage";
-	public interface ICoins {
-		  void responseData(ArrayList<CoinsPackages> listCoinsPackages);
-	}
 
-	public void getListCoinPackages(ICoins iCoinPackages) {
+
+	public ArrayList<CoinsPackages> getListCoinPackages() {
 		ArrayList<CoinsPackages> listCoinsPackages = new ArrayList<CoinsPackages>();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
 				for (DataSnapshot coins : snapshot.getChildren()) {
-					coinsPackages = coins.getValue(CoinsPackages.class);
-					listCoinsPackages.add(coinsPackages);
+					if ((CoinsPackages) coins.getValue(CoinsPackages.class) != null) {
+						coinsPackages = coins.getValue(CoinsPackages.class);
+						listCoinsPackages.add(coinsPackages);
+					}
 				}
-				iCoinPackages.responseData(listCoinsPackages);
 			}
 
 			@Override
@@ -39,6 +38,7 @@ public class CoinPackagesServices {
 
 			}
 		});
+		return listCoinsPackages;
 
 	}
 
@@ -52,10 +52,6 @@ public class CoinPackagesServices {
 				if (coinsPackages.getCoinId() == Integer.parseInt(id)) {
 					databaseReference.child(id).removeValueAsync();
 					isdeleted = false;
-				}
-
-				else {
-					isdeleted = true;
 				}
 
 			}

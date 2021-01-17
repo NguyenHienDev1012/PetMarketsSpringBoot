@@ -98,11 +98,17 @@
 												<td>${post.gender}</td>
 												<td>${post.healthGuarantee}</td>
 												<c:choose>
-													<c:when test="${post.hidden eq true}">
-													<td><span class="badge badge-pill badge-success" style="color: white">APPROVED</span></td>
+													<c:when test="${post.status == 0}">
+														<td><span class="badge badge-pill badge-warning"
+															style="color: white">WAITING</span></td>
 													</c:when>
-													<c:when test="${post.hidden eq false}">
-													<td><span class="badge badge-pill badge-warning" style="color: white">WAITING</span></td>
+													<c:when test="${post.status == 1}">
+														<td><span class="badge badge-pill badge-success"
+															style="color: white">APPROVED</span></td>
+													</c:when>
+													<c:when test="${post.status == 2}">
+														<td><span class="badge badge-pill badge-danger"
+															style="color: white">REFUSED</span></td>
 													</c:when>
 												</c:choose>
 												<td>${post.limitDay}</td>
@@ -158,8 +164,7 @@
 																						<div class="form-notch-trailing"></div>
 																					</div>
 																					<input type="text" id="form6Example2"
-																						class="form-control"
-																						value="${post.poster}"/>
+																						class="form-control" value="${post.poster}" />
 																				</div>
 																			</div>
 																			<div class="col">
@@ -309,14 +314,16 @@
 																							<div class="carousel-item active">
 																								<img
 																									src="https://firebasestorage.googleapis.com/v0/b/pet-market-6996.appspot.com/o/images%2F${image}?alt=media&token=cba8b49d-965c-4ca4-a6fc-980357fc575a"
-																									alt="Slide" ${loop3.count} width="550px" height="550px">
+																									alt="Slide" ${loop3.count} width="550px"
+																									height="550px">
 																							</div>
 																						</c:when>
 																						<c:when test="${loop3.count - 1 ne 0 }">
 																							<div class="carousel-item">
 																								<img
 																									src="https://firebasestorage.googleapis.com/v0/b/pet-market-6996.appspot.com/o/images%2F${image}?alt=media&token=cba8b49d-965c-4ca4-a6fc-980357fc575a"
-																									alt="Slide" ${loop3.count}  width="550px" height="550px">
+																									alt="Slide" ${loop3.count} width="550px"
+																									height="550px">
 																							</div>
 																						</c:when>
 																					</c:choose>
@@ -337,13 +344,13 @@
 																		</br>
 																		<!-- Submit button -->
 																		<div class="text-center">
-																			<a href="approvedPost?idPost=${post.postId}" class="btn btn-success">
-																				<i class="fa fa-check" aria-hidden="true">&nbsp;</i>Duyệt
-																				bài đăng
-																			</a>
-																			<a href="refusePost?idPost=${post.postId}" class="btn btn-warning">
-																				<i class="fas fa-comment-slash"></i>&nbsp;Từ chối
-																				bài đăng
+																			<a href="approvedPost?idPost=${post.postId}"
+																				class="btn btn-success"> <i class="fa fa-check"
+																				aria-hidden="true">&nbsp;</i>Duyệt bài đăng
+																			</a> <a href="refusePost?idPost=${post.postId}"
+																				class="btn btn-warning"> <i
+																				class="fas fa-comment-slash"></i>&nbsp;Từ chối bài
+																				đăng
 																			</a>
 																		</div>
 
@@ -360,8 +367,9 @@
 													</div> <!-- end edit post modal --> <a href=""
 													data-toggle="modal"
 													data-target="#editpostModal${post.postId}"
-													data-whatever="@fat" ><button class="btn btn-info"><i
-														class="fas fa-info-circle" style="color: white"></i></button></a>
+													data-whatever="@fat"><button class="btn btn-info">
+															<i class="fas fa-info-circle" style="color: white"></i>
+														</button></a>
 												</td>
 											</tr>
 										</c:forEach>

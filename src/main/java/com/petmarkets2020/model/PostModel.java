@@ -7,7 +7,7 @@ public class PostModel {
 	private String postId;
 	private String area;
 	private boolean isActive;
-	private boolean isHidden;
+	private boolean hidden;
 	private double latitude;
 	private double longitude;
 	private long limitDay;
@@ -24,36 +24,10 @@ public class PostModel {
 	private long viewCounts;
 	private String healthGuarantee;
 	private String injectStatus;
+	private int status;
 	private List<String> images;
 
 	public PostModel() {
-	}
-
-	public PostModel(String postId, String area, boolean isActive, boolean isHidden, double latitude, double longitude,
-			long limitDay, long price, String timeStart, String breed, String peAge, String peType, String poType,
-			String poster, String gender, String timeActive, String title, long viewCounts, String healthGuarantee,
-			String injectStatus, List<String> images) {
-		this.postId = postId;
-		this.area = area;
-		this.isActive = isActive;
-		this.isHidden = isHidden;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.limitDay = limitDay;
-		this.price = price;
-		this.timeStart = timeStart;
-		this.breed = breed;
-		this.peAge = peAge;
-		this.peType = peType;
-		this.poType = poType;
-		this.poster = poster;
-		this.gender = gender;
-		this.timeActive = timeActive;
-		this.title = title;
-		this.viewCounts = viewCounts;
-		this.healthGuarantee = healthGuarantee;
-		this.injectStatus = injectStatus;
-		this.images = images;
 	}
 
 	public String getPostId() {
@@ -81,11 +55,11 @@ public class PostModel {
 	}
 
 	public boolean isHidden() {
-		return isHidden;
+		return hidden;
 	}
 
-	public void setHidden(boolean isHidden) {
-		this.isHidden = isHidden;
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	public double getLatitude() {
@@ -216,9 +190,17 @@ public class PostModel {
 		this.injectStatus = injectStatus;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public List<String> getImages() {
 		return urlImages((ArrayList<String>) images);
-	}
+	};
 
 	public void setImages(List<String> images) {
 		this.images = images;
@@ -231,17 +213,16 @@ public class PostModel {
 			list.add(arr[1]);
 		}
 		return list;
-
 	}
 
 	@Override
 	public String toString() {
-		return "PostModel [postId=" + postId + ", area=" + area + ", isActive=" + isActive + ", isHidden=" + isHidden
+		return "PostModel [postId=" + postId + ", area=" + area + ", isActive=" + isActive + ", hidden=" + hidden
 				+ ", latitude=" + latitude + ", longitude=" + longitude + ", limitDay=" + limitDay + ", price=" + price
 				+ ", timeStart=" + timeStart + ", breed=" + breed + ", peAge=" + peAge + ", peType=" + peType
 				+ ", poType=" + poType + ", poster=" + poster + ", gender=" + gender + ", timeActive=" + timeActive
 				+ ", title=" + title + ", viewCounts=" + viewCounts + ", healthGuarantee=" + healthGuarantee
-				+ ", injectStatus=" + injectStatus + ", images=" + images + "]";
+				+ ", injectStatus=" + injectStatus + ", status=" + status + ", images=" + images + "]";
 	}
 
 }

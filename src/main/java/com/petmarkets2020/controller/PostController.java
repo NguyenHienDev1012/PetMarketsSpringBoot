@@ -29,19 +29,12 @@ public class PostController {
 				model.addAttribute("postList", listPosts);
 			}
 		});
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
 		return "postList";
 	}
 
 	@GetMapping("refusePost")
 	public String refusePost(@RequestParam String idPost, ModelMap model) {
 		postService.refusePost(idPost);
-
 		model.addAttribute("refusePost", "Post has been removed.");
 		return "redirect:/postList";
 

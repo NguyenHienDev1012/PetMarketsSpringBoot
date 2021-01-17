@@ -16,12 +16,8 @@ public class RankingsServices {
 	public HashMap<String, Rankings> hmRankings;
 	public HashMap<String, HashMap<String, Rankings>> rankings = new HashMap<String, HashMap<String, Rankings>>();
 
-	public interface IRankings {
-		public void responseData(HashMap<String, HashMap<String, Rankings>> rankings);
 
-	}
-
-	public void rankings(IRankings irankings) {
+	public HashMap<String, HashMap<String, Rankings>> rankings() {
 
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
@@ -34,7 +30,6 @@ public class RankingsServices {
 					});
 					rankings.put(data.getKey(), hmRankings);
 				}
-				irankings.responseData(rankings);
 			}
 
 			@Override
@@ -42,6 +37,7 @@ public class RankingsServices {
 
 			}
 		});
+		return rankings;
 
 	}
 

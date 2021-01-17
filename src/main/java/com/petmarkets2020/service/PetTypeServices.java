@@ -16,11 +16,7 @@ public class PetTypeServices {
 	HashMap<String, PetType> hm = new HashMap<String, PetType>();
 	private HashMap<String, PetType> childMap;
 
-	public interface IPetType {
-		void responseData(HashMap<String, HashMap<String, PetType>> thm);
-	}
-
-	public void getAll(IPetType iPetType) {
+	public HashMap<String, HashMap<String, PetType>> getAll() {
 		HashMap<String, HashMap<String, PetType>> thm = new HashMap<String, HashMap<String, PetType>>();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
@@ -34,7 +30,6 @@ public class PetTypeServices {
 					});
 					thm.put(data.getKey(), childMap);
 				}
-				iPetType.responseData(thm);
 			}
 
 			@Override
@@ -42,6 +37,7 @@ public class PetTypeServices {
 
 			}
 		});
+		return thm;
 	}
 
 }
