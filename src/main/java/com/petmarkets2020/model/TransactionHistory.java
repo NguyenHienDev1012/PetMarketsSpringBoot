@@ -39,10 +39,5 @@ public class TransactionHistory {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	@Override
-	public String toString() {
-		return "TransactionHistory [amount=" + amount + ", payments=" + payments + ", status=" + status + ", time="
-				+ time + "]";
-	}
 	
 }

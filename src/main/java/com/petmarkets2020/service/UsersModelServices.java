@@ -2,6 +2,8 @@ package com.petmarkets2020.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -11,35 +13,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petmarkets2020.model.UsersModel;
-import com.petmarkets2020.model.Utils;
 
 @Service
 public class UsersModelServices {
 	public static final String COL_NAME = "Users";
-	private List<UsersModel> listUsers;
+	List<UsersModel> list;
+	final CountDownLatch latch = new CountDownLatch(1);
 
-	public interface IUsers {
-		public void responseData(List<UsersModel> list);
-	}
-
-	public List<UsersModel> getListUser(IUsers iUsers) {
-		listUsers = new ArrayList<UsersModel>();
-		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
+	public List<UsersModel> getListUser() throws InterruptedException {
+		list = new ArrayList<UsersModel>();
+		FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+		DatabaseReference databaseReference = firebaseDatabase.getReference(COL_NAME);
+		databaseReference.addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
 				for (DataSnapshot data : snapshot.getChildren()) {
+					System.out.println(data.getKey());
 					UsersModel user = data.getValue(UsersModel.class);
-					listUsers.add(user);
-					iUsers.responseData(listUsers);
-
+					list.add(user);
 				}
 			}
+
 			@Override
 			public void onCancelled(DatabaseError error) {
 
 			}
 		});
-		return listUsers;
+		latch.await(700, TimeUnit.MILLISECONDS);
+		return list;
 	}
 }

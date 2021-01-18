@@ -13,7 +13,8 @@
 <meta name="author" content="">
 
 <title>SB Admin 2 - Tables</title>
-
+<link rel="shortcut icon" href="img/icon.png" type="image/png"
+	sizes="16x16">
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
@@ -70,7 +71,8 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered table table-striped"
+								<table
+									class="table table-bordered table table-striped text-center"
 									id="dataTable" width="100%" cellspacing="0">
 									<thead>
 
@@ -131,7 +133,7 @@
 	</a>
 
 	<!-- Logout Modal-->
-	
+
 	<script type="text/javascript">
 		$('.carousel').carousel()
 	</script>

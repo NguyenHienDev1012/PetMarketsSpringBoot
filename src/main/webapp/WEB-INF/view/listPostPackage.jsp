@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,10 +13,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="img/icon.png" type="image/png"
-	sizes="16x16">
 
-<title>Manage hot posts</title>
+<title>Manage list comments</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -26,6 +25,8 @@
 
 <!-- Custom styles for this template -->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="img/icon.png" type="image/png"
+	sizes="16x16">
 
 <!-- Custom styles for this page -->
 <link href="vendor/datatables/dataTables.bootstrap4.min.css"
@@ -57,7 +58,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Manage hot posts</h1>
+					<h1 class="h3 mb-2 text-gray-800">Manage list post package</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -66,26 +67,26 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered text-center" id="dataTable" width="100%"
-									cellspacing="0">
+								<table class="table table-bordered table-striped text-center"
+									id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Post ID</th>
-											<th>Package ID</th>
-											<th>DAYS</th>
-											<th>Start Time</th>
+											<th>Price</th>
+											<th>Title</th>
+											<th>Description</th>
 										</tr>
 									</thead>
 
 									<tbody>
-										<c:forEach items="${listhotpost}" var="hotpost" varStatus="loop">
+										<c:forEach items="${listPostPackage}" var="postPack"
+											varStatus="loop">
 											<tr>
-											    <td>${loop.count }</td>
-												<td>${hotpost.postId }</td>
-												<td>${hotpost.pkgId }</td>
-												<td>${hotpost.days}</td>
-												<td>${hotpost.startTime }</td>
+												<td>${loop.count }</td>
+												<td><fmt:formatNumber value="${postPack.price}"
+														type="number" minFractionDigits="0" /> đ</td>
+												<td>${postPack.title}</td>
+												<td>${postPack.description}</td>
 
 											</tr>
 										</c:forEach>

@@ -1,6 +1,8 @@
 package com.petmarkets2020.service;
 
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,8 @@ public class RankingsServices {
 	public static final String COL_NAME = "Rankings";
 	public HashMap<String, Rankings> hmRankings;
 	public HashMap<String, HashMap<String, Rankings>> rankings = new HashMap<String, HashMap<String, Rankings>>();
-
-	public interface IRankings {
-		public void responseData(HashMap<String, HashMap<String, Rankings>> rankings);
-
-	}
-
-	public void rankings(IRankings irankings) {
-
+	final CountDownLatch latch = new CountDownLatch(1);
+	public HashMap<String, HashMap<String, Rankings>> getAllRankings() throws InterruptedException {
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
 
 			@Override
@@ -34,15 +30,17 @@ public class RankingsServices {
 					});
 					rankings.put(data.getKey(), hmRankings);
 				}
-				irankings.responseData(rankings);
+
 			}
 
 			@Override
 			public void onCancelled(DatabaseError error) {
+				// TODO Auto-generated method stub
 
 			}
 		});
+		latch.await(700, TimeUnit.MILLISECONDS);
+		return rankings;
 
 	}
-
 }

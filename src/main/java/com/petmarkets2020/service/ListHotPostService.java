@@ -1,6 +1,8 @@
 package com.petmarkets2020.service;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,9 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class ListHotPostService {
 	private HotPost hotPost = new HotPost();
+	final CountDownLatch latch = new CountDownLatch(1);
 
-	public interface IHostPost {
-		void responseData(ArrayList<HotPost> lisHotPosts);
-	}
-
-	public ArrayList<HotPost> getListHotPost(IHostPost iHotPost) {
+	public ArrayList<HotPost> getListHotPost() throws InterruptedException {
 		ArrayList<HotPost> lisHotPosts = new ArrayList<HotPost>();
 		Utils.connectFireBase("HotPost").addValueEventListener(new ValueEventListener() {
 
@@ -27,10 +26,10 @@ public class ListHotPostService {
 				for (DataSnapshot dss : snapshot.getChildren()) {
 					hotPost = dss.getValue(HotPost.class);
 					lisHotPosts.add(hotPost);
-					iHotPost.responseData(lisHotPosts);
-
+					System.out.println(dss.getValue());
 				}
 
+				System.out.println(hotPost.toString());
 			}
 
 			@Override
@@ -38,6 +37,7 @@ public class ListHotPostService {
 
 			}
 		});
+		latch.await(700, TimeUnit.MICROSECONDS);
 		return lisHotPosts;
 
 	}

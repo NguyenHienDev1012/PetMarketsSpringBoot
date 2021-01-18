@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="shortcut icon" href="img/icon.png" type="image/png"
+	sizes="16x16">
 
 <title>Manage list history transaction</title>
 
@@ -55,7 +57,8 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Manage list history transaction</h1>
+					<h1 class="h3 mb-2 text-gray-800">Manage list history
+						transaction</h1>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -64,8 +67,8 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="80%"
-									cellspacing="0">
+								<table class="table table-bordered table-striped text-center"
+									id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -76,19 +79,22 @@
 											<th>Time</th>
 										</tr>
 									</thead>
-
+									<c:set var="count" value="1"></c:set>
 									<tbody>
-										<c:forEach items="${listHistory}" var="histories">
+										<c:forEach items="${listHistory}" var="histories"
+											varStatus="loop">
 											<c:forEach items="${histories.value}" var="history"
-												varStatus="loop">
+												varStatus="loop1">
 												<tr>
-													<td>${loop.count}</td>
+													<td>${count}</td>
 													<td>${histories.key}</td>
-													<td>${history.value.amount}</td>
+													<td><fmt:formatNumber value="${history.value.amount}"
+															type="number" minFractionDigits="0" /> đ</td>
 													<td>${history.value.payments}</td>
 													<td>${history.value.status}</td>
 													<td>${history.value.time}</td>
 												</tr>
+												<c:set var="count" value="${count+1}"></c:set>
 											</c:forEach>
 										</c:forEach>
 									</tbody>

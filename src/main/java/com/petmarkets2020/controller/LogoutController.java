@@ -14,7 +14,7 @@ public class LogoutController {
 	@Autowired
 	LogoutServices logoutservices;
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session) throws InterruptedException {
 	    logoutservices.logout(session);
 		return "login";
 		

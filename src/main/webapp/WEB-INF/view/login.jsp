@@ -12,7 +12,8 @@
 <meta name="author" content="">
 
 <title>Login</title>
-
+<link rel="shortcut icon" href="img/icon.png" type="image/png"
+	sizes="16x16">
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">

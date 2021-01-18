@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +12,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+  <link  rel="shortcut icon" href="img/icon.png" type="image/png" sizes="16x16">
 
-<title>Manage coin packages</title>
+<title>Manage </title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -77,11 +78,11 @@
 
 							<div class="table-responsive">
 
-								<table class="table table-bordered table-striped" id="dataTable" width="100%"
-									cellspacing="0">
+								<table class="table table-bordered table-striped text-center"
+									id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>#</th>
+											<th> &nbsp;  #</th>
 											<th>Value</th>
 											<th>Action</th>
 
@@ -93,9 +94,9 @@
 											varStatus="loop">
 
 											<tr>
-												<td>${loop.count-1}</td>
+												<td>${loop.count}</td>
 												<td><fmt:formatNumber value="${coin.value}"
-											type="number" minFractionDigits="0" /> đ</td>
+														type="number" minFractionDigits="0" /> đ</td>
 
 												<td>
 													<!-- Modal edit coin -->
@@ -136,14 +137,14 @@
 																</form>
 															</div>
 														</div>
-													</div> <!-- end modal edit coin --> <a
+													</div> <!-- end modal edit coin --> <a class="btn btn-warning"
 													href="editCoinPackages?id=${coin.coinId}"
 													data-toggle="modal"
 													data-target="#exampleModaledit${coin.coinId}"
 													data-whatever="@fat"><i class="fas fa-edit"
-														style="color: orange"> </i></a> &nbsp; &nbsp; <a
-													href="deletecoinpackages?id=${coin.coinId}">
-														<i class="fas fa-trash" style="color:red"></i>
+														style="color: white"> </i></a> &nbsp; &nbsp; <a class="btn btn-danger"
+													href="deletecoinpackages?id=${coin.coinId}"> <i
+														class="fas fa-trash" style="color: white"></i>
 												</a>
 												</td>
 											</tr>
@@ -155,7 +156,7 @@
 
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								data-target="#exampleModal" data-whatever="@fat">
-								<i class="fas fa-plus">Add new coins</i>
+								<i class="fas fa-plus"> Add new coins</i>
 							</button>
 						</div>
 					</div>
@@ -188,27 +189,7 @@
 	</a>
 
 	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<!-- Add coins modal -->
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"

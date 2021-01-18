@@ -12,7 +12,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<link rel="shortcut icon" href="img/icon.png" type="image/png"
+	sizes="16x16">
 <title>Manage list rankings</title>
 
 <!-- Custom fonts for this template -->
@@ -64,7 +65,7 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="80%"
+								<table class="table table-bordered table-striped text-center" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
 										<tr>

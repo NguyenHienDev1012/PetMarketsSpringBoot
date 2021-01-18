@@ -1,7 +1,7 @@
 package com.petmarkets2020.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -10,39 +10,36 @@ import org.springframework.stereotype.Service;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.petmarkets2020.model.PetType;
+import com.petmarkets2020.model.PostPackage;
 import com.petmarkets2020.model.Utils;
 
 @Service
-public class PetTypeServices {
-	public static final String COL_NAME = "PetType";
+public class PostPackageService {
+	public static final String COL_NAME = "PostPackage";
+	private List<PostPackage> list;
 	final CountDownLatch latch = new CountDownLatch(1);
-	private HashMap<String, PetType> childMap;
 
-	public HashMap<String, HashMap<String, PetType>> getAll() throws InterruptedException {
-		HashMap<String, HashMap<String, PetType>> thm = new HashMap<String, HashMap<String, PetType>>();
+	public List<PostPackage> getAllPostPackage() throws InterruptedException{
+		list = new ArrayList<PostPackage>();
 		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
-
+			
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
-
-				for (DataSnapshot data : snapshot.getChildren()) {
-					childMap = new HashMap<>();
-					data.getChildren().forEach(dataSnap -> {
-						childMap.put(dataSnap.getKey(), dataSnap.getValue(PetType.class));
-					});
-					thm.put(data.getKey(), childMap);
+				for (DataSnapshot posts : snapshot.getChildren()) {
+					PostPackage p = posts.getValue(PostPackage.class);
+					list.add(p);
 				}
+				
 			}
-
+			
 			@Override
 			public void onCancelled(DatabaseError error) {
-
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		latch.await(700, TimeUnit.MILLISECONDS);
-		return thm;
+		return list;
 	}
 
-//	
 }

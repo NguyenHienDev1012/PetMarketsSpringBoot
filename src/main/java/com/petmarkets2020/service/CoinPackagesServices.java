@@ -1,6 +1,8 @@
 package com.petmarkets2020.service;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -14,24 +16,21 @@ import com.petmarkets2020.model.Utils;
 @Service
 public class CoinPackagesServices {
 
-	private CoinsPackages coinsPackages;
+	private CoinsPackages coinsPackages = new CoinsPackages();
 	private boolean isdeleted = false;
-	public static final String COL_NAME = "CoinsPackage";
-	public interface ICoins {
-		  void responseData(ArrayList<CoinsPackages> listCoinsPackages);
-	}
-
-	public void getListCoinPackages(ICoins iCoinPackages) {
+	final CountDownLatch latch = new CountDownLatch(1);
+	public ArrayList<CoinsPackages> getListCoinPackages() throws InterruptedException {
 		ArrayList<CoinsPackages> listCoinsPackages = new ArrayList<CoinsPackages>();
-		Utils.connectFireBase(COL_NAME).addValueEventListener(new ValueEventListener() {
+		Utils.connectFireBase("CoinsPackage").addValueEventListener(new ValueEventListener() {
 
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
-				for (DataSnapshot coins : snapshot.getChildren()) {
-					coinsPackages = coins.getValue(CoinsPackages.class);
+				for (DataSnapshot dss : snapshot.getChildren()) {
+					coinsPackages = dss.getValue(CoinsPackages.class);
 					listCoinsPackages.add(coinsPackages);
+					System.out.println(dss.getValue());
 				}
-				iCoinPackages.responseData(listCoinsPackages);
+
 			}
 
 			@Override
@@ -39,6 +38,8 @@ public class CoinPackagesServices {
 
 			}
 		});
+		latch.await(700, TimeUnit.MICROSECONDS);
+		return listCoinsPackages;
 
 	}
 
@@ -52,10 +53,12 @@ public class CoinPackagesServices {
 				if (coinsPackages.getCoinId() == Integer.parseInt(id)) {
 					databaseReference.child(id).removeValueAsync();
 					isdeleted = false;
+					System.out.println("Vao day 1");
 				}
 
 				else {
 					isdeleted = true;
+					System.out.println("Vao day o");
 				}
 
 			}
@@ -77,5 +80,7 @@ public class CoinPackagesServices {
 		databaseReference.child(String.valueOf(coinsPackages.getCoinId())).child("value")
 				.setValueAsync(coinsPackages.getValue());
 	}
+	
+
 
 }
