@@ -64,10 +64,13 @@ public class PostService {
 				.setValueAsync(postId);
 		Utils.connectFireBase(COL_NAME_NOTI).child(col_poster).child(keyNotiification).child("time")
 				.setValueAsync(time);
+		Utils.connectFireBase(COL_NAME_NOTI).child(col_poster).child(keyNotiification).child("notiId")
+				.setValueAsync(System.currentTimeMillis());
 	}
 
 	String postTitle;
 	String poster;
+	String notiId;
 
 	public void refusePost(String idPost) {
 		DatabaseReference databaseReference = Utils.connectFireBase(COL_NAME);
@@ -106,7 +109,6 @@ public class PostService {
 				String statusApprove = "bài viết " + postTitle + " đã được duyệt";
 				setNotification(poster, statusApprove, idPost, currentdate);
 			}
-			 
 
 			@Override
 			public void onCancelled(DatabaseError error) {
